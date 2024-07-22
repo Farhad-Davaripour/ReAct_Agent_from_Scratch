@@ -22,9 +22,10 @@ question = st.text_input("Question", "Allocate resources to high-priority tasks,
 max_turns = 5
 
 if st.button("Run"):
-    result = query(question, max_turns, known_actions, model_type)
-    
-    st.markdown("### Conversation:")
-    for i, message in enumerate(result):
-        with st.expander(f"{i+1.0}. {message['role'].capitalize()} Prompt"):
-            st.json(message)
+    with st.spinner("Processing your query..."):
+        result = query(question, max_turns, known_actions, model_type)
+        
+        st.markdown("### Conversation:")
+        for i, message in enumerate(result):
+            with st.expander(f"{i+1.0}. {message['role'].capitalize()} Prompt"):
+                st.json(message)
