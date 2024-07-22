@@ -1,6 +1,9 @@
 # ReAct Agentic Workflow
 
-This repository provides an introductory implementation of the ReAct (Reasoning and Acting) Agentic workflow. The example has been deployed and could be accessed through this [link](). Accordingly, a simple example is designed and implemented which includes the following tasks:
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://react-agent-from-scratch.streamlit.app/).
+
+
+This repository provides an introductory implementation of the ReAct (Reasoning and Acting) Agentic workflow. The example has been deployed and could be accessed through this [link](https://react-agent-from-scratch.streamlit.app/). Accordingly, a simple example is designed and implemented which includes the following tasks:
 
 1. Retrieve a list of tasks.
 2. Retrieve available resources.
