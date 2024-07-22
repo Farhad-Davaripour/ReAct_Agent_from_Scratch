@@ -28,12 +28,6 @@ Contains utility functions and the `Agent` class, which manages the Thought, Act
 #### config.py
 
 Defines the system prompt guiding the agent's actions and responses, detailing how the agent should handle the Thought, Action, PAUSE, and Observation loop.
-## Features
-
-- **Model Selection**: Choose between GPT-4 and GPT-3.5-turbo models.
-- **Resource Allocation**: Allocate resources to tasks based on priority.
-- **Budget Estimation**: Estimate the budget based on allocated hours and predefined hourly rates.
-- **Interactive Workflow**: Employ a loop of Thought, Action, PAUSE, and Observation to interactively address tasks.
 
 ## Installation
 
@@ -73,3 +67,6 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Reference
+This project draws inspiration from the short course offered by [deeplearning.ai](https://www.deeplearning.ai/): [AI Agents in LangGraph](https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/). The Agent class and query function in `src/tools.py` are largely based on the source code provided in this course.
