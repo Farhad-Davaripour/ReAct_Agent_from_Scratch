@@ -17,7 +17,9 @@ known_actions = {
     "estimate_budget": lambda hours: estimate_budget(int(hours), hourly_rate=50)
 }
 
-question = st.text_input("Question", "Allocate resources to high-priority tasks, summarize the allocation, and estimate the total budget.")
+question = "Allocate resources to high-priority tasks, summarize the allocation, and estimate the total budget."
+st.markdown("**Question:**")
+st.write(question)
 
 max_turns = 5
 
