@@ -31,9 +31,6 @@ class Agent:
                         messages=self.messages)
         return completion.choices[0].message.content
 
-def calculate(what):
-    return eval(what)
-
 def retrieve_tasks(unused_input=None):
     """Simulated external data retrieval"""
     return [
@@ -54,20 +51,10 @@ def retrieve_resources(unused_input=None):
         {"resource": "Yuki", "skill": "Cybersecurity", "available_hours": 40}
     ]
 
-def allocate_resources(allocation_input=None):
-    """Parse the allocation_input and return a list of allocations
-    For simplicity, let's assume it's already in the correct format"""
-    if allocation_input is None:
-        return "Error: No allocation input provided. Please provide allocation details."
-    return eval(allocation_input)
-
-def estimate_budget(hours, hourly_rate):
-    """Estimate the budget based on the number of hours and hourly rate"""
-    return hours * hourly_rate
 
 action_re = re.compile(r'Action: (\w+)(?:\s*:\s*(.+))?')
 
-def query(question, max_turns=10, known_actions={} ,LLM_type="gpt-4o-mini"):
+def query(question, max_turns=10, known_actions={} ,LLM_type="gpt-4o"):
     i = 0
     bot = Agent(prompt, LLM_type)
     next_prompt = question
@@ -97,4 +84,4 @@ def query(question, max_turns=10, known_actions={} ,LLM_type="gpt-4o-mini"):
         else:
             break 
 
-    return messages
+    return messages, result
