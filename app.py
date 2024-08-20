@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import importlib
 import src.tools as tools
@@ -8,18 +9,34 @@ importlib.reload(tools)
 from src.tools import query, retrieve_tasks, retrieve_resources
 import re
 
-st.title("ReAct Agentic Workflow")
+# Create two columns
+col1, col2 = st.columns([3, 1.2])
+
+with col1:
+    # Setting the title and configuring the layout of the Streamlit page
+    st.title("ReAct Agentic Workflow")
+
+
+with col2:
+    # Ensure the environment variable for the figure path is correctly set
+    logo_file_path = "artifacts/arcurve_logo.jpeg"
+    print(logo_file_path)
+    if logo_file_path and os.path.exists(logo_file_path):
+        st.image(logo_file_path, width=200)
+    else:
+        st.error("Figure path is not set correctly or the file does not exist.")
+
 
 with st.expander("Problem Statement:"):
     st.markdown("""
     This example simulates a project management scenario where we need to allocate resources to various tasks.
-    The ReAct Agent will help us prioritize and assign resources based on task priorities and resource availability.
+    The ReAct Agent will help us assign resources based on task priorities and resource availability.
     
-    Below are the available tasks and resources for this simulation:
+    Below are the tasks and available resources for this simulation:
     """)
 
     # Display tasks
-    st.markdown("**Available Tasks:**")
+    st.markdown("**Active Tasks:**")
     st.markdown("These tasks represent different project components with varying priorities and estimated effort in hours.")
     tasks = retrieve_tasks()
     st.table(tasks)

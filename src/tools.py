@@ -31,15 +31,22 @@ class Agent:
                         messages=self.messages)
         return completion.choices[0].message.content
 
-def retrieve_tasks(unused_input=None):
-    """Simulated external data retrieval"""
-    return [
+def retrieve_tasks(priority_level=None):
+    """Retrieve tasks filtered by priority level."""
+    
+    tasks = [
         {"task": "Implement Machine Learning Model", "priority": "High", "effort": 40},
         {"task": "Optimize Database Queries", "priority": "Medium", "effort": 25},
         {"task": "Design User Interface", "priority": "High", "effort": 30},
         {"task": "Set Up CI/CD Pipeline", "priority": "Low", "effort": 20},
         {"task": "Perform Security Audit", "priority": "Medium", "effort": 35}
     ]
+    
+    if priority_level:
+        filtered_tasks = [task for task in tasks if task["priority"].lower() == priority_level.lower()]
+        return filtered_tasks
+
+    return tasks
 
 def retrieve_resources(unused_input=None):
     """Simulated external resource retrieval"""
@@ -52,9 +59,9 @@ def retrieve_resources(unused_input=None):
     ]
 
 
-action_re = re.compile(r'Action: (\w+)(?:\s*:\s*(.+))?')
+action_re = re.compile(r'Action:\s*(\w+)(?:\((.*?)\))?')
 
-def query(question, max_turns=10, known_actions={} ,LLM_type="gpt-4o"):
+def query(question, max_turns=10, known_actions={}, LLM_type="gpt-4o"):
     i = 0
     bot = Agent(prompt, LLM_type)
     next_prompt = question
@@ -64,23 +71,30 @@ def query(question, max_turns=10, known_actions={} ,LLM_type="gpt-4o"):
         result, messages = bot(next_prompt)
         print(result)
         
+        # Match the action using the updated regex
         actions = [
-            action_re.match(a) 
+            action_re.match(a.strip()) 
             for a in result.split('\n') 
-            if action_re.match(a)
+            if action_re.match(a.strip())
         ]
        
         if actions:
             action, action_input = actions[0].groups()
-            if action not in known_actions:
-                raise Exception("Unknown action: {}: {}".format(action, action_input))
-            print(" -- running {} {}".format(action, action_input))
             
-            # Always pass action_input, even if it's None
+            if action_input:
+                action_input = action_input.strip("'\"")
+                key_value_match = re.match(r'(\w+)=(.+)', action_input)
+                if key_value_match:
+                    action_input = key_value_match.group(2).strip("'\"")
+            else:
+                action_input = None
+
+            print(f" -- running {action} with input: {action_input}")
+
             observation = known_actions[action](action_input)
             
             print("Observation:", observation)
-            next_prompt = "Observation: {}".format(observation)
+            next_prompt = f"Observation: {observation}"
         else:
             break 
 
