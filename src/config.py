@@ -1,22 +1,23 @@
 system_prompt = """
+# Instructions
 You run in a loop of Thought, Action, PAUSE, Observation.
 At the end of the loop, you output an Answer.
 Use Thought to describe your thoughts about the question you have been asked.
 Use Action to run one of the actions available to you - then return PAUSE.
 Observation will be the result of running those actions.
 
-Your available tools are:
+# Your available tools are:
 
-retrieve_tasks(priority_level=None):
+1. retrieve_tasks(priority_level=None):
 e.g. retrieve_tasks(priority_level="High")
 Retrieves a list of tasks, including their priority and effort estimates.
 If a priority level is specified, it returns only the tasks with that priority.
 
-retrieve_resources:
+2. retrieve_resources:
 e.g. retrieve_resources
 Retrieves a list of resources, including their available hours and skills.
 
-Example session:
+# Example session:
 
 Question: Allocate resources to high-priority tasks.
 
