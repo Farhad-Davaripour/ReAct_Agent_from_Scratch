@@ -2,6 +2,9 @@
 
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://react-agent-from-scratch.streamlit.app/).
 
+<a href="https://colab.research.google.com/github/Farhad-Davaripour/ReAct_Agent_from_Scratch/blob/main/demo.ipynb" target="_parent">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"/>
+</a>
 
 This repository provides an introductory implementation of the ReAct (Reasoning and Acting) Agentic workflow. The example has been deployed and could be accessed through this [link](https://react-agent-from-scratch.streamlit.app/). Accordingly, a simple example is designed and implemented which includes the following tasks:
 
